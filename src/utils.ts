@@ -5,7 +5,6 @@ export const haversine_distance = (
     lng: number;
   }
 ) => {
-  console.log(coordinate1, coordinate2);
   var R = 6371.071; // Radius of the Earth in km
   var rlat1 = coordinate1.lat * (Math.PI / 180); // Convert degrees to radians
   var rlat2 = coordinate2.lat * (Math.PI / 180); // Convert degrees to radians
@@ -24,6 +23,5 @@ export const haversine_distance = (
             Math.sin(difflon / 2)
       )
     );
-  console.log("distance:" + d);
   return d;
 };

@@ -10,17 +10,20 @@ import { light } from "@mui/material/styles/createPalette";
 
 export const Hero = () => {
   const [currentCode, setCurrentCode] = useState<string>("");
-  const { setCode } = useContext(LighterContext);
+  const { setLighter } = useContext(LighterContext);
+  const navigate = useNavigate();
+  const [notFoundError, setNotFoundError] = useState(false);
 
-  const goToLighter = () => {
-    if (currentCode.length > 0) {
-      setCode(currentCode);
+  const goToLighter = async () => {
+    const lighter = await getOneLighter(currentCode.toUpperCase());
+    if (lighter) {
+      setLighter(lighter);
+      navigate(`/lighter`);
+    } else {
+      setNotFoundError(true);
     }
   };
 
-  useEffect(() => {
-    setCode("");
-  }, []);
   return (
     <motion.div
       className="flex w-full flex-col gap-4 items-center justify-center md:mt-12 relative py-8"
@@ -58,6 +61,9 @@ export const Hero = () => {
       />
       <h1 className="std-btn" onClick={goToLighter}>
         Show lighter log
+      </h1>
+      <h1 className="text-center text-black h-6">
+        {notFoundError ? "Lighter not found" : ""}
       </h1>
     </motion.div>
   );

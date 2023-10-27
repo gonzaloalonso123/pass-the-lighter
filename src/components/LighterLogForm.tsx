@@ -106,7 +106,6 @@ export const LighterLogForm = ({
     }
 
     const imageRef = ref(storage, `images/ + ${v4()}`);
-    console.log(imageRef.fullPath);
     uploadBytes(imageRef, file)
       .then((snapshot) => {
         getDownloadURL(ref(storage, snapshot.ref.fullPath))

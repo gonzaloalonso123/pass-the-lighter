@@ -1,5 +1,12 @@
 import React from "react";
+import { LighterInfo } from "./LighterInfo";
+import { LighterStory } from "./LighterStory";
 
 export const LatestStory = () => {
-  return <div>LatestStory</div>;
+  return (
+    <div>
+      <LighterInfo />
+      <LighterStory />
+    </div>
+  );
 };

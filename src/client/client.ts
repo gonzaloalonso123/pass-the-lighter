@@ -4,7 +4,6 @@ import { Lighter, Log } from "../types/types";
 import { log } from "console";
 
 export const getOneLighter = async (id: string) => {
-  console.log(id);
   const docRef = doc(db, "lighters", id);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {

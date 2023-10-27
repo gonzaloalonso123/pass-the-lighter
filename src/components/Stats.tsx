@@ -17,7 +17,6 @@ export const Stats = () => {
       getMetadata()
         .then((metadata) => {
           setMetadata(metadata);
-          console.log(metadata);
         })
         .catch((err) => {
           console.log(err);

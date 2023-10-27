@@ -21,7 +21,7 @@
     "autosuggest-highlight": "^3.3.4",
     "axios": "^1.5.1",
     "dayjs": "^1.11.10",
-    "firebase": "^10.5.0",
+    "firebase": "^10.5.2",
     "framer-motion": "^10.16.4",
     "geocoder": "^0.2.3",
     "google": "^2.1.0",

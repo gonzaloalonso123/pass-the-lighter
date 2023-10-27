@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Lighter } from "../types/types";
-import { truncate } from "fs";
 import { getOneLighter } from "../client/client";
-import { useNavigate } from "react-router-dom";
 
 type LighterContextType = {
   lighter: Lighter | null;
   setLighter: (lighter: Lighter) => void;
   logged: boolean;
   setLogged: () => void;
-  setCode: (code: string) => void;
-  getLighter: (lighter: Lighter) => void;
-  code: string;
+  update: () => void;
 };
 
 export const LighterContext = React.createContext<LighterContextType>({
@@ -19,9 +15,7 @@ export const LighterContext = React.createContext<LighterContextType>({
   setLighter: () => {},
   logged: false,
   setLogged: () => {},
-  setCode: () => {},
-  getLighter: () => {},
-  code: "",
+  update: () => {},
 });
 
 export const LighterContextProvider = ({
@@ -37,51 +31,32 @@ export const LighterContextProvider = ({
     id: "",
   });
 
-  const [code, setCode] = useState("");
-  const navigate = useNavigate();
   const [logged, setLogged] = useState(false);
 
   useEffect(() => {
     const isLogged = localStorage.getItem("logged");
-    const lighter = sessionStorage.getItem("lighter");
-    if (isLogged === "true") {
+    const l = sessionStorage.getItem("lighter");
+    if (isLogged === lighter.id) {
       setLogged(true);
     }
-    if (lighter) {
-      setLighter(JSON.parse(lighter));
+    if (l) {
+      setLighter(JSON.parse(l));
     }
   }, []);
 
-  useEffect(() => {
-    console.log("code changed", code);
-    if (code) {
-      getLighter().then(() => {
-        if (lighter) {
-          navigate(`/lighter`);
-        }
-      });
-    }
-  }, [code]);
-
-  const getLighter = async () => {
-    // try {
-    const l = await getOneLighter(lighter?.id || code.toUpperCase());
-    if (l) {
-      setLighterSession(l);
-    }
-    // } catch (e) {
-    //   navigate(`/`);
-    // }
-  };
-
   const setLoggedLocal = () => {
-    localStorage.setItem("logged", "true");
+    localStorage.setItem("logged", lighter.id);
     setLogged(true);
   };
 
   const setLighterSession = (lighter: Lighter) => {
     sessionStorage.setItem("lighter", JSON.stringify(lighter));
     setLighter(lighter);
+  };
+
+  const update = async () => {
+    const l = await getOneLighter(lighter.id);
+    setLighterSession(l!);
   };
 
   return (
@@ -91,9 +66,7 @@ export const LighterContextProvider = ({
         setLighter: setLighterSession,
         logged,
         setLogged: setLoggedLocal,
-        getLighter,
-        setCode,
-        code,
+        update,
       }}
     >
       {children}
