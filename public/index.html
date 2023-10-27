@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="Pass the lighter" content="Pass the lighter" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <script>
+      function initMap() {}
+    </script>
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT5Nnzu7hHJ4CJbsSFbJkcPd_Vd15X1EY&libraries=places&callback=initMap"
+      async
+    ></script>
+    <script>
+      window.googleMapsScriptLoaded = false;
+      function initMap() {
+        window.googleMapsScriptLoaded = true;
+      }
+    </script>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Pass the lightr</title>
+  </head>
+  <body>
+    <noscript></noscript>
+    <div id="root"></div>
+  </body>
+</html>

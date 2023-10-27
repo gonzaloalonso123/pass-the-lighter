@@ -1,0 +1,16 @@
+.std-btn {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.std-btn:hover {
+  background-color: #333;
+}
+
+.map-container {
+  height: 500px;
+  width: 100%;
+}
